@@ -9,4 +9,4 @@ install:
 	@echo "Building with Titanium..."
 	@rm -rf ${PROJECT_ROOT}/workspace/build/iphone/
 	@mkdir -p ${PROJECT_ROOT}/workspace/build/iphone/
-	@PROJECT_NAME=${PROJECT_NAME} PROJECT_ROOT=${PROJECT_ROOT} DEVICE_TYPE=iphone bash ${PROJECT_ROOT}/bin/titanium.sh
+	@PROJECT_NAME=${PROJECT_NAME} PROJECT_ROOT=${PROJECT_ROOT} DEVICE_TYPE=iphone bash ${PROJECT_ROOT}/workspace/bin/titanium.sh
