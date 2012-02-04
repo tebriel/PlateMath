@@ -32,7 +32,7 @@ if [ "APP_ID" == "" ] || [ "APP_NAME" == "" ]; then
 	exit 1
 fi
 
-bash -c "${TI_BUILD} install ${IPHONE_SDK_VERSION} ${PROJECT_ROOT}/${PROJECT_NAME}/ ${APP_ID} \"MJR Theatres\" ${PROVISIONING} ${MY_PROFILE} iphone" \
+bash -c "${TI_BUILD} install ${IPHONE_SDK_VERSION} ${PROJECT_ROOT}/workspace/ ${APP_ID} \"MJR Theatres\" ${PROVISIONING} ${MY_PROFILE} iphone" \
 	| perl -pe 's/^\[DEBUG\].*$/\e[35m$&\e[0m/g;s/^\[INFO\].*$/\e[36m$&\e[0m/g;s/^\[WARN\].*$/\e[33m$&\e[0m/g;s/^\[ERROR\].*$/\e[31m$&\e[0m/g;'
 
 # killall "iPhone Simulator"
