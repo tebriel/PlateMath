@@ -30,4 +30,5 @@ function calculatePlates(desiredWeight) {
 			break;
 		}
 	}
+	return plateObjs;
 }
