@@ -25,14 +25,14 @@ fi
 
 # Get APP parameters from current tiapp.xml
 APP_ID=`cat tiapp.xml | grep "<id>" | sed -e "s/<\/*id>//g"`
-#APP_NAME=`cat tiapp.xml | grep "<name>" | sed -e "s/<\/*name>//g"`
+APP_NAME=`cat tiapp.xml | grep "<name>" | sed -e "s/<\/*name>//g"`
 
 if [ "APP_ID" == "" ] || [ "APP_NAME" == "" ]; then
 	echo "[ERROR] Could not obtain APP parameters from tiapp.xml file (does the file exist?)."
 	exit 1
 fi
 
-bash -c "${TI_BUILD} install ${IPHONE_SDK_VERSION} ${PROJECT_ROOT}/workspace/ ${APP_ID} \"MJR Theatres\" ${PROVISIONING} ${MY_PROFILE} iphone" \
+bash -c "${TI_BUILD} install ${IPHONE_SDK_VERSION} ${PROJECT_ROOT}/workspace/ ${APP_ID} ${APP_NAME} ${PROVISIONING} ${MY_PROFILE} iphone" \
 	| perl -pe 's/^\[DEBUG\].*$/\e[35m$&\e[0m/g;s/^\[INFO\].*$/\e[36m$&\e[0m/g;s/^\[WARN\].*$/\e[33m$&\e[0m/g;s/^\[ERROR\].*$/\e[31m$&\e[0m/g;'
 
 # killall "iPhone Simulator"
