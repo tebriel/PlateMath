@@ -1,14 +1,8 @@
-Welcome to your Appcelerator Titanium Mobile Project
+PlateMath
 
-This is a single window application with a single view - a mostly blank canvas. Requires Titanium Mobile SDK 1.8.0+
-
-----------------------------------
-Stuff our legal folk make us say:
-
-Appcelerator, Appcelerator Titanium and associated marks and logos are 
-trademarks of Appcelerator, Inc. 
-
-Titanium is Copyright (c) 2009-2012 by Appcelerator, Inc. All Rights Reserved.
-
-Titanium is licensed under the Apache Public License (Version 2). Please
-see the LICENSE file for the full license.
+This is a simple app to calculate how many of what 
+plate weight you should add to the bar in barbell
+training depending on what your goal is to lift. 
+Will be able to edit the avaialable plates to match
+what users have in their own gyms/at home. Will handle
+various bar weights.

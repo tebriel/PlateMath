@@ -43,6 +43,7 @@
 	height:20;
 	background-color:#FFF;
 	top:'25%';
+	text-align: center;
 }
 
 #settingsButton {
