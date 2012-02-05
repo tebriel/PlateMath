@@ -15,18 +15,22 @@ function ApplicationWindow() {
 	
 	this.self = Titanium.UI.createWindow();
 	
-	//create component instance
-	this.settingsView = new SettingsView(this.settings);
-	this.mainView = new MainView(this.ChangeSettings, this.settings);
-
-	//construct UI
-	this.settingsWin = Ti.UI.createWindow({
-		id:'settingsWindow'
-	});
-	this.settingsWin.add(this.settingsView);
 	var mainWin = Ti.UI.createWindow({
 		id:'mainWindow'
 	});
+
+	this.settingsWin = Ti.UI.createWindow({
+		id:'settingsWindow'
+	});
+	
+	//create component instance
+	this.settingsView = new SettingsView(this.settings, this.settingsWin);
+	this.mainView = new MainView(this.ChangeSettings, this.settings);
+
+	//construct UI
+
+	this.settingsWin.add(this.settingsView);
+
 	//Adding a nav bar gives us the TitleBar with the App name
 	this.nav = Titanium.UI.iPhone.createNavigationGroup({
    		window: mainWin

@@ -1,16 +1,26 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 //FirstView Component Constructor
-function SettingsView(settings) {
+function SettingsView(settings, win) {
 	//create object instance, a parasitic subclass of Observable
-	this.self = Ti.UI.createView();
+	this.win           = win;
+	this.settings      = settings;
+	this.editButton    = null;
+		
+	this.self          = Ti.UI.createView();
 	//Bind things
-	this.createView = __bind(this.createView, this);
-	this.settings = settings;	
+	this.createView    = __bind(this.createView, this);
+	this.editTable     = __bind(this.editTable, this);
+	this.addEditButton = __bind(this.addEditButton, this);
+
 	
 	this.createView();
 	
 	return this.self;
+}
+
+SettingsView.prototype.addEditButton = function() {
+	this.win.rightNavButton = this.editButton;
 }
 
 SettingsView.prototype.createView = function() {
@@ -20,6 +30,13 @@ SettingsView.prototype.createView = function() {
 		id:'settingsTable'
 	});
 	this.self.add(plateTable);
+	
+	this.editButton = Ti.UI.createButton({
+		systemButton: Ti.UI.iPhone.SystemButton.EDIT
+	});
+	this.editButton.addEventListener('click', this.editTable);
+	
+	this.addEditButton();	
 	
 	plateTable.data = [];
 	var tableData = [];
@@ -35,6 +52,12 @@ SettingsView.prototype.createView = function() {
 		tableData.push(row);
 	}
 	plateTable.data = tableData;
+	
+	
+}
+
+SettingsView.prototype.editTable = function() {
+	
 }
 
 module.exports = SettingsView;
