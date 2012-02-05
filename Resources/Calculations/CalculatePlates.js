@@ -1,7 +1,7 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-function calculatePlates(desiredWeight) {
-	var plates = [45, 35, 25, 10, 5, 2.5];
+function calculatePlates(plateList, desiredWeight) {
+	var plates = plateList;
 	var plateObjs = [];
 	for (var i=0; i<plates.length; i++) {
 		plateObjs.push(new PlateObject(plates[i],true));

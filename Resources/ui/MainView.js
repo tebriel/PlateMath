@@ -4,15 +4,17 @@ Ti.include('Calculations/CalculatePlates.js', 'Calculations/PlateObject.js')
 Ti.include('Utilities/sprintf-0.7-beta1.js');
 
 //FirstView Component Constructor
-function MainView(settingsCall) {
+function MainView(settingsCall, settings) {
 	//create object instance, a parasitic subclass of Observable
 	this.self = Ti.UI.createView();
 	this.desiredWeight = null;
+	
 	this.changeSettings = settingsCall;
+	this.settings = settings;
+	
 	//Bind things
 	this.createView = __bind(this.createView, this);
 	this.callCalc = __bind(this.callCalc, this);
-	
 	
 	this.createView();
 	
@@ -26,63 +28,52 @@ MainView.prototype.createView = function() {
 	});
 	this.self.add(label);
 	
-	//Add behavior for UI
-	label.addEventListener('click', function(e) {
-		alert(e.source.text);
-	});
-	
 	var button = Ti.UI.createButton({
-		title:'Push Me!',
-		width:'50%',
-		height:'10%',
-		top:'35%',
-		color:'#000'
+		id:'calcButton'
 	});
 	this.self.add(button);
 	
 	button.addEventListener('click', this.callCalc);
+	
+	//TODO: this button needs an image (wrench/? mark)
 	var settingsButton = Ti.UI.createButton({ 
-		systemButton: Ti.UI.iPhone.SystemButton.INFO_DARK,
-		width:20,
-		height:20, 
-		right:10,
-		bottom:10
+		id:'settingsButton',
+		systemButton: Ti.UI.iPhone.SystemButton.INFO_DARK
 	});
 		
-	//settingsButton.addEventListener('click', this.changeSettings);
+	settingsButton.addEventListener('click', this.changeSettings);
 	this.self.add(settingsButton);
 	
 	this.desiredWeight = Ti.UI.createTextField({
-		width:100,
-		height:20,
-		backgroundColor:'#FFF',
+		id:'weightEntry',
 	 	borderStyle:Titanium.UI.INPUT_BORDERSTYLE_ROUNDED,
-		top:'25%',
 		keyboardType:Ti.UI.KEYBOARD_NUMBER_PAD
 	});
 	
 	this.self.add(this.desiredWeight);
 	
 	this.Results = Ti.UI.createTextArea({
-		height:'50%',
-		width:'100%',
-		top:'50%',
-		backgroundColor:'#CCC',
-		color:'#000',
-		editable:false
+		id:'calcResultsArea'
 	});
 	this.self.add(this.Results);
 }
 
 MainView.prototype.callCalc = function() {
+	//Hide the keyboard
 	this.desiredWeight.blur();
+	
+	//Factor out the barbell
+	//TODO: use the settings for this weight
 	var toCalc = Math.max(0,this.desiredWeight.value - 45);
-	var resultSet = calculatePlates(toCalc);
-	this.Results.value = ((this.desiredWeight.value >=45)? '1 @ Bar(45)\n':'');
+	var resultSet = calculatePlates(this.settings.plateList, toCalc);
+	
+	//TODO: Convert to a sprintf for the setting for the bar weight
+	this.Results.value = ((this.desiredWeight.value >=45)? L('bar_weight'):'');
+	
+	//TODO: Make this prettier!
 	for (var i=0; i<resultSet.length; i++) {
 		var result = resultSet[i];
-		this.Results.value += sprintf('%(quantity)d @ %(weight)f\n', result, result); 
-									//resultSet[i].getQuantity(), resultSet[i].getWeight().toString());
+		this.Results.value += sprintf(L('plate_qty'), result, result); 
 	}
 }
 

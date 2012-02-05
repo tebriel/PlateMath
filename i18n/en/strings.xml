@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <resources>
 	<string name="welcome">Welcome to %s!</string>
+	<string name="plate_size">Plate Size: %d</string>
+	<string name="plate_qty">%(quantity)d @ %(weight)f\n</string>
+	<string name="bar_weight">1 @ Bar(45)\n</string>
+	<string name="app_title">PlateMath</string>
+	<string name="settings">Settings</string>
+	
+	<string name="button_calc">Calculate Plates</string>
 </resources>
