@@ -4,13 +4,13 @@ function PlateObject(weight, isPounds) {
 	if (weight) {
 		this.weight = weight;
 	} else {
-		weight = 0;
+		this.weight = 0;
 	}
 	
 	if (isPounds) {
 		this.isPounds = isPounds;
 	} else {
-		isPounds = true;
+		this.isPounds = true;
 	}
 
 	this.quantity = 0;

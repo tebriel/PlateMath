@@ -1,6 +1,7 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
 Ti.include('Calculations/CalculatePlates.js', 'Calculations/PlateObject.js')
+Ti.include('Utilities/sprintf-0.7-beta1.js');
 
 //FirstView Component Constructor
 function MainView(settingsCall) {
@@ -67,17 +68,21 @@ MainView.prototype.createView = function() {
 		width:'100%',
 		top:'50%',
 		backgroundColor:'#CCC',
-		color:'#000'
+		color:'#000',
+		editable:false
 	});
 	this.self.add(this.Results);
 }
 
 MainView.prototype.callCalc = function() {
 	this.desiredWeight.blur();
-	var resultSet = calculatePlates(this.desiredWeight.value);
-	this.Results.value = '';
+	var toCalc = Math.max(0,this.desiredWeight.value - 45);
+	var resultSet = calculatePlates(toCalc);
+	this.Results.value = ((this.desiredWeight.value >=45)? '1 @ Bar(45)\n':'');
 	for (var i=0; i<resultSet.length; i++) {
-		this.Results.value += String.format('%d @ %d\n', resultSet[i].getWeight(), resultSet[i].getQuantity());
+		var result = resultSet[i];
+		this.Results.value += sprintf('%(quantity)d @ %(weight)f\n', result, result); 
+									//resultSet[i].getQuantity(), resultSet[i].getWeight().toString());
 	}
 }
 
